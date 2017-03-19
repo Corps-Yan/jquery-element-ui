@@ -1,0 +1,24 @@
+{
+  "name": "jquery-element-ui",
+  "version": "1.0.0",
+  "description": "element-ui for jquery",
+  "main": "dist/jquery-element-ui.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "dev": "rm -rf dist && gulp && gulp watch",
+    "prod": "rm -rf dist && gulp --prod"
+  },
+  "author": "youngluo",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eagle": "^1.1.4",
+    "gulp-webpack": "^1.5.0",
+    "url-loader": "^0.5.8"
+  }
+}
