@@ -5,6 +5,7 @@ var Eagle = require('gulp-eagle'),
     $ = Eagle.plugins;
 
 config.buildPath = 'dist';
+config.version.enabled = false;
 
 Eagle.extend('base64', function (src, output, removePath) {
     var paths = new Eagle.GulpPaths().src(src).output(output);
@@ -47,10 +48,9 @@ Eagle.extend('base64', function (src, output, removePath) {
 
 Eagle(function (mix) {
     mix.sass('./src/jquery-element-ui.scss')
-        .base64('./src/jquery-element-ui.js')
-        .copy(['./node_modules/jquery/dist/jquery.js']);
+        .base64('./src/jquery-element-ui.js');
 
     if (!config.production) {
-        mix.copy('./examples/index.html');
+        mix.copy(['./node_modules/jquery/dist/jquery.js', './examples/index.html']);
     }
 });
