@@ -6,13 +6,14 @@ var Eagle = require('gulp-eagle'),
 
 config.buildPath = 'dist';
 config.version.enabled = false;
+config.browserSync.options.port = 3000;
 
-Eagle.extend('base64', function (src, output, removePath) {
+Eagle.extend('webpack', function (src, output, removePath) {
     var paths = new Eagle.GulpPaths().src(src).output(output);
 
     removePath = typeof removePath === 'boolean' ? removePath : config.removePath;
 
-    new Eagle.Task('base64', function () {
+    new Eagle.Task('webpack', function () {
         this.log(paths.src, paths.output);
 
         return (
@@ -48,7 +49,7 @@ Eagle.extend('base64', function (src, output, removePath) {
 
 Eagle(function (mix) {
     mix.sass('./src/jquery-element-ui.scss')
-        .base64('./src/jquery-element-ui.js');
+        .webpack('./src/jquery-element-ui.js');
 
     if (!config.production) {
         mix.copy(['./node_modules/jquery/dist/jquery.js', './examples/index.html']);
