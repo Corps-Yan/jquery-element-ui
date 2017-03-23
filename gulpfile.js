@@ -28,6 +28,10 @@ Eagle.extend('webpack', function (src, output, removePath) {
                             {
                                 test: /\.svg$/,
                                 loader: 'url-loader?limit=8192'
+                            },
+                            {
+                                test: /\.ejs$/,
+                                loader: 'ejs-loader'
                             }
                         ]
                     }

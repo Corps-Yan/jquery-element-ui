@@ -62,8 +62,7 @@
 
             options = $.extend({}, defaultOptions, options);
 
-            var closeIcon = options.closable ? '<i class="el-tag__close el-icon-close"></i>' : '',
-                html = '<span class="el-tag el-tag--' + options.type + '">' + options.message + closeIcon + '</span>',
+            var html = require('./template/tag.ejs')(options),
                 $html = $(html);
 
             $(options.target).append($html);

@@ -16,6 +16,7 @@
     "jquery": "^3.2.0"
   },
   "devDependencies": {
+    "ejs-loader": "^0.3.0",
     "gulp": "^3.9.1",
     "gulp-eagle": "^1.1.4",
     "gulp-webpack": "^1.5.0",
