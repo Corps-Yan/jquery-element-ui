@@ -1,5 +1,6 @@
 var Eagle = require('gulp-eagle'),
     gulp = require('gulp'),
+    replace = require('gulp-replace'),
     webpack = require('gulp-webpack'),
     config = Eagle.config,
     $ = Eagle.plugins;
@@ -8,10 +9,8 @@ config.buildPath = 'dist';
 config.version.enabled = false;
 config.browserSync.options.port = 3000;
 
-Eagle.extend('webpack', function (src, output, removePath) {
+Eagle.extend('webpack', function (src, output) {
     var paths = new Eagle.GulpPaths().src(src).output(output);
-
-    removePath = typeof removePath === 'boolean' ? removePath : config.removePath;
 
     new Eagle.Task('webpack', function () {
         this.log(paths.src, paths.output);
@@ -40,9 +39,6 @@ Eagle.extend('webpack', function (src, output, removePath) {
                     compress: {
                         drop_console: true
                     }
-                })))
-                .pipe($.if(removePath, $.rename({
-                    dirname: ''
                 })))
                 .pipe(gulp.dest(paths.output.baseDir))
         );

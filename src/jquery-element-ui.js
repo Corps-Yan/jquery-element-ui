@@ -2,9 +2,7 @@
 
     var collections = {
         loading: function (message) {
-            message = message ? '<p class="el-loading-text">' + message + '</p>' : '';
-            var html = '<div class="el-loading-spinner"><svg viewBox="25 25 50 50" class="circular"><circle cx="50" cy="50" r="20" fill="none" class="path"></circle></svg>' + message + '</div>';
-            var $html = $(html);
+            var $html = $(require('./templates/loading.ejs')({ message: message }));
 
             $html.appendTo($('body'));
 
@@ -15,14 +13,15 @@
             };
         },
         alert: function (title, message) {
-            var html = '<div class="el-message-box__wrapper"><div class="el-message-box"><div class="el-message-box__title">' + title + '</div><div class="el-message-box__message"><p>' + message + '</p></div><div class="el-message-box__btns"><button type="button" class="el-button">确定</button></div></div></div>';
-            var $html = $(html);
+            var $html = $(require('./templates/alert.ejs')({
+                title: title,
+                message: message
+            }));
 
-            $html.appendTo($('body'));
-
-            $html.find('.el-button').one('click', function () {
-                $html.remove();
-            });
+            $html.appendTo($('body'))
+                .find('.el-button').one('click', function () {
+                    $html.remove();
+                });
         },
         message: function (options) {
             var defaultOptions = {
@@ -37,9 +36,11 @@
                 info: require('./assets/info.svg'),
                 error: require('./assets/error.svg'),
                 warning: require('./assets/warning.svg'),
-            },
-                html = '<div class="el-message"><img src="' + icons[options.type] + '" alt="" class="el-message__img"><div class="el-message__group"><p>' + options.message + '</p></div></div>',
-                $html = $(html);
+            };
+
+            options.icon = icons[options.type];
+
+            var $html = $(require('./templates/message.ejs')(options));
 
             $html.appendTo($('body'))
                 .ready(function () {
@@ -62,8 +63,7 @@
 
             options = $.extend({}, defaultOptions, options);
 
-            var html = require('./template/tag.ejs')(options),
-                $html = $(html);
+            var $html = $(require('./templates/tag.ejs')(options));
 
             $(options.target).append($html);
 

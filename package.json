@@ -7,7 +7,8 @@
     "example": "examples"
   },
   "scripts": {
-    "dev": "rm -rf dist && gulp && gulp watch",
+    "dev": "rm -rf dist && gulp",
+    "watch": "rm -rf dist && gulp && gulp watch",
     "prod": "rm -rf dist && gulp --prod"
   },
   "author": "youngluo",
