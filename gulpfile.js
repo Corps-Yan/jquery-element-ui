@@ -1,6 +1,5 @@
 var Eagle = require('gulp-eagle'),
     gulp = require('gulp'),
-    replace = require('gulp-replace'),
     webpack = require('gulp-webpack'),
     config = Eagle.config,
     $ = Eagle.plugins;

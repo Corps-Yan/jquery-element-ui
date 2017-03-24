@@ -161,6 +161,7 @@
 .el-tag {
     background-color: #8391a5;
     display: inline-block;
+    margin-right: 10px;
     padding: 0 5px;
     height: 24px;
     line-height: 22px;
@@ -188,10 +189,23 @@
         }
     }
     @at-root {
-        .el-tag--default {
-            .el-tag__close:hover {
-                background-color: #fff;
-                color: #8391a5;
+        //依次代表类型、背景色、边框色、字体颜色
+        $tag-types: ('default', #8391a5, transparent, #fff), ('gray', #e4e8f1, #e4e8f1, #48576a), ('primary', rgba(32, 160, 255, .1), rgba(32, 160, 255, .2), #20a0ff), ('success', rgba(18, 206, 102, .1), rgba(18, 206, 102, .2), #13ce66), ('warning', rgba(247, 186, 41, .1), rgba(247, 186, 41, .2), #f7ba2a), ('danger', rgba(255, 73, 73, .1), rgba(255, 73, 73, .2), #ff4949);
+        @each $type in $tag-types {
+            .el-tag--#{nth($type,1)} {
+                background-color: nth($type, 2);
+                border-color: nth($type, 3);
+                color: nth($type, 4);
+                .el-tag__close:hover {
+                    background-color: nth($type, 4);
+                    @if index($tag-types,
+                    $type)==1 {
+                        color: nth($type, 2);
+                    }
+                    @else {
+                        color: #fff;
+                    }
+                }
             }
         }
     }

@@ -9,10 +9,11 @@
     <title>Document</title>
     <style>
         .tags {
-            border: solid 1px #000;
-            width: 300px;
-            height: 30px;
-            padding: 0 50px;
+            border: solid 1px #ccc;
+            width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            text-align: center;
         }
     </style>
 </head>
@@ -23,7 +24,41 @@
     <script src="jquery-element-ui.js"></script>
     <script>
         setTimeout(function () {
-            $.elementUI.loading('数据加载中');
+            $.elementUI.createTag({
+                message: '标签一',
+                closable: true,
+                target: '.tags'
+            });
+            $.elementUI.createTag({
+                message: '标签一',
+                closable: true,
+                target: '.tags',
+                type: 'gray'
+            });
+            $.elementUI.createTag({
+                message: '标签一',
+                closable: true,
+                target: '.tags',
+                type: 'success'
+            });
+            $.elementUI.createTag({
+                message: '标签一',
+                closable: true,
+                target: '.tags',
+                type: 'primary'
+            });
+            $.elementUI.createTag({
+                message: '标签一',
+                closable: true,
+                target: '.tags',
+                type: 'warning'
+            });
+            $.elementUI.createTag({
+                message: '标签一',
+                closable: true,
+                target: '.tags',
+                type: 'danger'
+            });
         }, 2000)
     </script>
 </body>
