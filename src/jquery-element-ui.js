@@ -19,7 +19,7 @@
             }));
 
             $html.appendTo($('body'))
-                .find('.el-button').one('click', function () {
+                .find('.el-button,.el-message-box__close').one('click', function () {
                     $html.remove();
                 });
         },
@@ -72,6 +72,20 @@
                     $html.remove();
                 });
             }
+        },
+        autocomplete: function (options) {
+            var dataList = [];
+            for (var i = 0; i < 30; i++) {
+                dataList.push(i);
+            }
+            options.dataList = dataList;
+            var $html = $(require('./templates/autocomplete.ejs')(options));
+
+            $(options.target)
+                .attr('autocomplete', 'off')
+                .addClass('el-input__inner')
+                .wrap('<div class="el-autocomplete"></div>')
+                .after($html)
         }
     }
 

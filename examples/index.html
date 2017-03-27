@@ -60,6 +60,10 @@
             <button class="message">显示message</button>
         </li>
         <li>
+            <h3>autocomplete</h3>
+            <input class="autocomplete" type="text">
+        </li>
+        <li>
             <h3>loading</h3>
             <button class="loading">显示loading</button>
             <button class="closeLoading">关闭loading</button>
@@ -100,7 +104,9 @@
 
         $('.closeLoading').click(function () {
             closeLoading();
-        })
+        });
+
+        $.elementUI.autocomplete({ target: '.autocomplete' });
     </script>
 </body>
 
