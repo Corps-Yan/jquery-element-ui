@@ -8,58 +8,99 @@
     <link rel="stylesheet" href="jquery-element-ui.css">
     <title>Document</title>
     <style>
-        .tags {
-            border: solid 1px #ccc;
-            width: 500px;
-            margin: 0 auto;
-            padding: 30px;
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 600px;
+            margin: 100px auto;
+        }
+        
+        li {
+            list-style: none;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            text-align: left;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 400px;
+        }
+        
+        button {
+            outline: none;
+            box-sizing: border-box;
+            border: 1px solid #20a0ff;
+            background-color: #fff;
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #20a0ff;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <div class="tags"></div>
+    <ul class="container">
+        <li>
+            <h3>标签</h3>
+            <div class="tags"></div>
+        </li>
+        <li>
+            <h3>alert</h3>
+            <button class="alert">显示alert</button>
+        </li>
+        <li>
+            <h3>message</h3>
+            <button class="message">显示message</button>
+        </li>
+        <li>
+            <h3>loading</h3>
+            <button class="loading">显示loading</button>
+            <button class="closeLoading">关闭loading</button>
+        </li>
+    </ul>
     <script src="jquery.js"></script>
     <script src="jquery-element-ui.js"></script>
     <script>
-        setTimeout(function () {
-            $.elementUI.createTag({
-                message: '标签一',
-                closable: true,
-                target: '.tags'
-            });
-            $.elementUI.createTag({
-                message: '标签一',
-                closable: true,
-                target: '.tags',
-                type: 'gray'
-            });
+        var tagTypes = ['default', 'gray', 'primary', 'success', 'warning', 'danger'];
+
+        for (var i = 0; i < tagTypes.length; i++) {
             $.elementUI.createTag({
                 message: '标签一',
                 closable: true,
                 target: '.tags',
-                type: 'success'
+                type: tagTypes[i]
             });
-            $.elementUI.createTag({
-                message: '标签一',
-                closable: true,
-                target: '.tags',
-                type: 'primary'
+        }
+
+        $('.alert').click(function () {
+            $.elementUI.alert('参数错误', '数据请求失败');
+        });
+
+        var messageTypes = ['info', 'success', 'warning', 'error']
+
+        $('.message').click(function () {
+            var index = Math.ceil(Math.random() * messageTypes.length) - 1;
+            $.elementUI.message({
+                message: '标签创建成功',
+                type: messageTypes[index]
             });
-            $.elementUI.createTag({
-                message: '标签一',
-                closable: true,
-                target: '.tags',
-                type: 'warning'
-            });
-            $.elementUI.createTag({
-                message: '标签一',
-                closable: true,
-                target: '.tags',
-                type: 'danger'
-            });
-        }, 2000)
+        });
+
+        var closeLoading;
+        $('.loading').click(function () {
+            closeLoading = $.elementUI.loading('数据加载中');
+        });
+
+        $('.closeLoading').click(function () {
+            closeLoading();
+        })
     </script>
 </body>
 
