@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'iconfont';
     /* project id 260176 */
-    src: url('//at.alicdn.com/t/font_3fd6nrc42i7r2j4i.eot');
-    src: url('//at.alicdn.com/t/font_3fd6nrc42i7r2j4i.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_3fd6nrc42i7r2j4i.woff') format('woff'), url('//at.alicdn.com/t/font_3fd6nrc42i7r2j4i.ttf') format('truetype'), url('//at.alicdn.com/t/font_3fd6nrc42i7r2j4i.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.eot');
+    src: url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.woff') format('woff'), url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.ttf') format('truetype'), url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.svg#iconfont') format('svg');
 }
 
 [class*=" el-icon-"],
@@ -22,6 +22,13 @@
 .el-icon-close {
     &:before {
         content: "\e6b6";
+    }
+}
+
+.el-icon-loading {
+    animation: loading-rotate 1s linear infinite;
+    &:before {
+        content: "\e64e";
     }
 }
 
@@ -53,25 +60,6 @@
         margin: 3px 0;
         font-size: 14px;
     }
-    @keyframes loading-rotate {
-        100% {
-            transform: rotate(1turn);
-        }
-    }
-    @keyframes loading-dash {
-        0% {
-            stroke-dasharray: 1, 200;
-            stroke-dashoffset: 0;
-        }
-        50% {
-            stroke-dasharray: 90, 150;
-            stroke-dashoffset: -40px;
-        }
-        100% {
-            stroke-dasharray: 90, 150;
-            stroke-dashoffset: -120px;
-        }
-    }
 }
 
 .el-message-box__wrapper {
@@ -80,6 +68,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 101;
     background-color: rgba(0, 0, 0, .5);
     .el-message-box {
         @extend %vertical-center;
@@ -258,13 +247,23 @@
             }
         }
     }
+    .el-autocomplete-loading {
+        padding: 15px 0;
+        text-align: center;
+        i {
+            display: inline-block;
+            font-size: 24px;
+            color: #8492a6;
+        }
+    }
     .el-autocomplete-suggestion {
+        display: none;
         position: absolute;
         top: 36px;
-        z-index: 2066;
+        z-index: 100;
         width: 100%;
         margin: 5px 0;
-        max-height: 280px;
+        max-height: 200px;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, .04), 0 2px 4px 0 rgba(0, 0, 0, .12);
         background-color: #fff;
         border: 1px solid #d1dbe5;
@@ -287,5 +286,26 @@
                 background-color: #e4e8f1;
             }
         }
+    }
+}
+
+@keyframes loading-rotate {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+@keyframes loading-dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -40px;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -120px;
     }
 }

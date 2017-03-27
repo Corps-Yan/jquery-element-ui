@@ -1,9 +1,11 @@
 <div class="el-autocomplete-suggestion">
-    <div class="el-autocomplete-loading"></div>
+    <div class="el-autocomplete-loading">
+        <i class="el-icon-loading"></i>
+    </div>
     <% if(dataList) { %>
         <ul class="el-autocomplete-suggestion-data">
             <% dataList.forEach(function(item) { %>
-                <li><%= item %></li>
+                <li data-id="<%= item.id %>"><%= item.value %></li>
             <% }) %>
         </ul>
     <% } %>

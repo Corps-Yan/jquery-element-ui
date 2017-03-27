@@ -76,16 +76,31 @@
         autocomplete: function (options) {
             var dataList = [];
             for (var i = 0; i < 30; i++) {
-                dataList.push(i);
+                dataList.push({ id: i, value: 'ly' + i });
             }
             options.dataList = dataList;
             var $html = $(require('./templates/autocomplete.ejs')(options));
 
-            $(options.target)
+            var $autocomplete = $(options.target)
                 .attr('autocomplete', 'off')
                 .addClass('el-input__inner')
                 .wrap('<div class="el-autocomplete"></div>')
                 .after($html)
+                .focus(function () {
+                    $(this).next('.el-autocomplete-suggestion').slideDown(150);
+                })
+                .blur(function () {
+                    $(this).next('.el-autocomplete-suggestion').slideUp(150);
+                })
+                .parent();
+
+            if (options.itemSelected) {
+                $autocomplete
+                    .find('li')
+                    .click(function () {
+                        options.itemSelected($(this).data('id'), $(this).text());
+                    });
+            }
         }
     }
 
