@@ -81,7 +81,7 @@
             options.dataList = dataList;
             var $html = $(require('./templates/autocomplete.ejs')(options));
 
-            var $autocomplete = $(options.target)
+            var $target = $(options.target)
                 .attr('autocomplete', 'off')
                 .addClass('el-input__inner')
                 .wrap('<div class="el-autocomplete"></div>')
@@ -91,14 +91,17 @@
                 })
                 .blur(function () {
                     $(this).next('.el-autocomplete-suggestion').slideUp(150);
-                })
-                .parent();
+                });
 
             if (options.itemSelected) {
-                $autocomplete
-                    .find('li')
-                    .click(function () {
+                $target
+                    .parent()
+                    .on('mousedown', 'li', function (event) {
+                        event.preventDefault();
+                    })
+                    .on('click', 'li', function () {
                         options.itemSelected($(this).data('id'), $(this).text());
+                        $target.blur();
                     });
             }
         }
