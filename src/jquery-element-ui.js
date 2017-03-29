@@ -48,15 +48,14 @@
             $html
                 .appendTo($('body'))
                 .ready(function () {
-                    $html.addClass('el-message-fade');
+                    $html.animate({ opacity: 1, top: '20px' }, 300);
                 });
 
             if (options.duration > 0) {
                 setTimeout(function () {
-                    $html.removeClass('el-message-fade');
-                    setTimeout(function () {
-                        $html.remove();
-                    }, 300);
+                    $html.animate({ opacity: 0, top: '-20px' }, 300, function () {
+                        $(this).remove();
+                    });
                 }, options.duration);
             }
         },

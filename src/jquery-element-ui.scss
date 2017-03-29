@@ -158,10 +158,9 @@
     border-radius: 2px;
     position: fixed;
     left: 50%;
-    top: 20px;
+    top: -20px;
     opacity: 0;
-    transform: translate(-50%, -100%);
-    transition: opacity .3s, transform .4s;
+    transform: translateX(-50%);
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     .el-message__icon {
         width: 40px;
@@ -197,12 +196,6 @@
     @each $type in $iconTypes {
         .el-message--#{nth($type,1)} {
             background-color: nth($type, 2);
-        }
-    }
-    @at-root {
-        .el-message-fade {
-            opacity: 1;
-            transform: translateX(-50%);
         }
     }
 }
