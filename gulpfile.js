@@ -1,5 +1,6 @@
 var Eagle = require('gulp-eagle'),
     gulp = require('gulp'),
+    replace = require('gulp-replace'),
     webpack = require('gulp-webpack'),
     config = Eagle.config,
     $ = Eagle.plugins;
@@ -35,6 +36,7 @@ Eagle.extend('webpack', function (src, output) {
                         drop_console: true
                     }
                 })))
+                .pipe(replace(/\\r\\n\ +/g, ''))
                 .pipe(gulp.dest(paths.output.baseDir))
         );
     })
