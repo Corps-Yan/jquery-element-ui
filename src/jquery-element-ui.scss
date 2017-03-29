@@ -247,11 +247,16 @@
             }
         }
     }
+    .el-autocomplete-hint {
+        padding: 35px 0;
+        text-align: center;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.43);
+    }
     .el-autocomplete-loading {
-        padding: 15px 0;
+        padding: 35px 0;
         text-align: center;
         i {
-            display: inline-block;
             font-size: 24px;
             color: #8492a6;
         }

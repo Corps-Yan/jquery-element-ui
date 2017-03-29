@@ -108,6 +108,14 @@
 
         $.elementUI.autocomplete({
             target: '.autocomplete',
+            message: '请输入标签',
+            getData: function (value) {
+                var data = [];
+                for (var i = 0; i < 20; i++) {
+                    data.push({ id: i, value: 'ly' + i });
+                }
+                this.render(data);
+            },
             itemSelected: function (id, value) {
                 console.log(id, value)
             }

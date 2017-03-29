@@ -1,11 +1,24 @@
 (function ($) {
 
+    var utils = {
+        debounce: function (fn, delay) {
+            var timer;
+            return function () {
+                var ctx = this,
+                    args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    fn.apply(ctx, args);
+                }, delay);
+            }
+        }
+    }
+
     var collections = {
         loading: function (message) {
             var $html = $(require('./templates/loading.ejs')({ message: message }));
-
             $html.appendTo($('body'));
-
+            
             return function () {
                 $html.fadeOut(300, function () {
                     this.remove();
@@ -18,7 +31,8 @@
                 message: message
             }));
 
-            $html.appendTo($('body'))
+            $html
+                .appendTo($('body'))
                 .find('.el-button,.el-message-box__close').one('click', function () {
                     $html.remove();
                 });
@@ -28,21 +42,18 @@
                 type: 'info',
                 duration: 3000
             }
-
             options = $.extend({}, defaultOptions, options);
-
             var icons = {
                 success: require('./assets/success.svg'),
                 info: require('./assets/info.svg'),
                 error: require('./assets/error.svg'),
                 warning: require('./assets/warning.svg'),
             };
-
             options.icon = icons[options.type];
-
             var $html = $(require('./templates/message.ejs')(options));
 
-            $html.appendTo($('body'))
+            $html
+                .appendTo($('body'))
                 .ready(function () {
                     $html.addClass('el-message-fade');
                 });
@@ -60,12 +71,12 @@
                 closable: false,
                 type: 'default'
             }
-
             options = $.extend({}, defaultOptions, options);
-
             var $html = $(require('./templates/tag.ejs')(options));
 
-            $(options.target).append($html);
+            if (options.target) {
+                $(options.target).append($html);
+            }
 
             if (options.closable) {
                 $html.find('.el-icon-close').one('click', function () {
@@ -74,34 +85,65 @@
             }
         },
         autocomplete: function (options) {
-            var dataList = [];
-            for (var i = 0; i < 30; i++) {
-                dataList.push({ id: i, value: 'ly' + i });
-            }
-            options.dataList = dataList;
-            var $html = $(require('./templates/autocomplete.ejs')(options));
+            options.message = options.message ? options.message : '请输入查询条件';
 
-            var $target = $(options.target)
-                .attr('autocomplete', 'off')
-                .addClass('el-input__inner')
-                .wrap('<div class="el-autocomplete"></div>')
-                .after($html)
+            var $html = $(require('./templates/autocomplete.ejs')(options)),
+                $target = $(options.target)
+                    .attr('autocomplete', 'off')
+                    .addClass('el-input__inner')
+                    .wrap('<div class="el-autocomplete"></div>')
+                    .after($html),
+                $autocomplete = $target.parent(),
+                $dataWrapper = $autocomplete.find('.el-autocomplete-suggestion-data'),
+                $loading = $autocomplete.find('.el-autocomplete-loading'),
+                $hint = $autocomplete.find('.el-autocomplete-hint');
+
+            $target
                 .focus(function () {
+                    if (!$dataWrapper.html()) {
+                        $hint.show();
+                        $loading.hide();
+                    }
                     $(this).next('.el-autocomplete-suggestion').slideDown(150);
                 })
                 .blur(function () {
                     $(this).next('.el-autocomplete-suggestion').slideUp(150);
+                })
+                .on('input', utils.debounce(function () {
+                    var value = $.trim($(this).val());
+                    if (!value) {
+                        $dataWrapper.html('');
+                        $hint.show();
+                    }
+                    if (options.getData && value) {
+                        $loading.show();
+                        $hint.hide();
+                        options.getData(value);
+                    }
+                }, 300));
+
+            options.render = function (data) {
+                $loading.hide();
+                var html = '';
+                data.forEach(function (item) {
+                    html += '<li data-id="' + item.id + '">' + item.value + '</li>';
                 });
+                $dataWrapper.html(html);
+            }
+
+            options.reset = function () {
+                $target.val('').removeAttr('data-id');
+            }
 
             if (options.itemSelected) {
-                $target
-                    .parent()
+                $autocomplete
                     .on('mousedown', 'li', function (event) {
                         event.preventDefault();
                     })
                     .on('click', 'li', function () {
-                        options.itemSelected($(this).data('id'), $(this).text());
-                        $target.blur();
+                        var value = $(this).text(), id = $(this).data('id');
+                        $target.blur().val(value).attr('data-id', id);
+                        options.itemSelected(id, value);
                     });
             }
         }
