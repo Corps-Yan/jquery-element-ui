@@ -36,7 +36,7 @@ Eagle.extend('webpack', function (src, output) {
                         drop_console: true
                     }
                 })))
-                .pipe(replace(/\\r\\n\ +/g, ''))
+                .pipe(replace(/\\r\\n\ */g, ''))
                 .pipe(gulp.dest(paths.output.baseDir))
         );
     })
