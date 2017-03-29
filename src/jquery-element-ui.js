@@ -18,7 +18,7 @@
         loading: function (message) {
             var $html = $(require('./templates/loading.ejs')({ message: message }));
             $html.appendTo($('body'));
-            
+
             return function () {
                 $html.fadeOut(300, function () {
                     this.remove();
@@ -43,13 +43,6 @@
                 duration: 3000
             }
             options = $.extend({}, defaultOptions, options);
-            var icons = {
-                success: require('./assets/success.svg'),
-                info: require('./assets/info.svg'),
-                error: require('./assets/error.svg'),
-                warning: require('./assets/warning.svg'),
-            };
-            options.icon = icons[options.type];
             var $html = $(require('./templates/message.ejs')(options));
 
             $html
@@ -60,9 +53,10 @@
 
             if (options.duration > 0) {
                 setTimeout(function () {
-                    $html.removeClass('el-message-fade', function () {
-                        this.remove();
-                    });
+                    $html.removeClass('el-message-fade');
+                    setTimeout(function () {
+                        $html.remove();
+                    }, 300);
                 }, options.duration);
             }
         },

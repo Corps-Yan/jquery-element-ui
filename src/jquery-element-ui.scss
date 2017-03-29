@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'iconfont';
     /* project id 260176 */
-    src: url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.eot');
-    src: url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.woff') format('woff'), url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.ttf') format('truetype'), url('//at.alicdn.com/t/font_yosd1yuzogf4j9k9.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_tcffq0dtu7peqaor.eot');
+    src: url('//at.alicdn.com/t/font_tcffq0dtu7peqaor.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_tcffq0dtu7peqaor.woff') format('woff'), url('//at.alicdn.com/t/font_tcffq0dtu7peqaor.ttf') format('truetype'), url('//at.alicdn.com/t/font_tcffq0dtu7peqaor.svg#iconfont') format('svg');
 }
 
 [class*=" el-icon-"],
@@ -30,6 +30,22 @@
     &:before {
         content: "\e64e";
     }
+}
+
+.el-icon-success:before {
+    content: "\e64b";
+}
+
+.el-icon-info:before {
+    content: "\e6cf";
+}
+
+.el-icon-warning:before {
+    content: "\e6ce";
+}
+
+.el-icon-error:before {
+    content: "\e600";
 }
 
 %vertical-center {
@@ -147,12 +163,16 @@
     transform: translate(-50%, -100%);
     transition: opacity .3s, transform .4s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    .el-message__img {
+    .el-message__icon {
         width: 40px;
         height: 40px;
+        line-height: 40px;
         position: absolute;
         left: 0;
         top: 0;
+        text-align: center;
+        color: #fff;
+        font-size: 18px;
     }
     .el-message__group {
         margin-left: 38px;
@@ -164,6 +184,19 @@
             white-space: nowrap;
             color: #8391a5;
             text-align: justify;
+        }
+    }
+    $iconTypes: ('info',
+    #50BFFF),
+    ('error',
+    #FF4949),
+    ('success',
+    #13CE66),
+    ('warning',
+    #F7BA2A);
+    @each $type in $iconTypes {
+        .el-message--#{nth($type,1)} {
+            background-color: nth($type, 2);
         }
     }
     @at-root {
