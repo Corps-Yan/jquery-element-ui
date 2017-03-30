@@ -37,12 +37,11 @@ $('.message').click(function () {
 });
 
 //创建loading加载
-var closeLoading;
 $('.loading').click(function () {
-    closeLoading = $.elementUI.loading('数据加载中');
-});
-$('.closeLoading').click(function () {
-    closeLoading();
+    var closeLoading = $.elementUI.loading('数据加载中');
+    setTimeout(function () {
+        closeLoading();
+    }, 2000);
 });
 
 //创建远程搜索
@@ -57,7 +56,7 @@ $.elementUI.autocomplete({
         }
         setTimeout(function () {
             self.render(data);
-        }, 3000);
+        }, 2000);
     },
     itemSelected: function (id, value) {
         console.log(id, value)
