@@ -93,10 +93,6 @@
 
             $target
                 .focus(function () {
-                    if (!$dataWrapper.html()) {
-                        $hint.show();
-                        $loading.hide();
-                    }
                     $(this).next('.el-autocomplete-suggestion').slideDown(150);
                 })
                 .blur(function () {
@@ -104,11 +100,11 @@
                 })
                 .on('input', utils.debounce(function () {
                     var value = $.trim($(this).val());
+                    $dataWrapper.html('');
                     if (!value) {
-                        $dataWrapper.html('');
-                        $hint.show();
+                        return $hint.show();
                     }
-                    if (options.getData && value) {
+                    if (options.getData) {
                         $loading.show();
                         $hint.hide();
                         options.getData(value);

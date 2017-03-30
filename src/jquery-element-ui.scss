@@ -49,13 +49,25 @@
 }
 
 %vertical-center {
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.el-loading-spinner {
+.el-loading-mask {
     position: fixed;
+    z-index: 10001;
+    background-color: hsla(0, 0%, 100%, .9);
+    margin: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: opacity .3s;
+}
+
+.el-loading-spinner {
     @extend %vertical-center;
     text-align: center;
     .circular {
@@ -84,10 +96,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 101;
+    z-index: 10001;
     background-color: rgba(0, 0, 0, .5);
     .el-message-box {
-        position: absolute;
         @extend %vertical-center;
         text-align: left;
         background-color: #fff;
@@ -281,6 +292,7 @@
         color: rgba(0, 0, 0, 0.43);
     }
     .el-autocomplete-loading {
+        display: none;
         padding: 35px 0;
         text-align: center;
         i {

@@ -66,7 +66,6 @@
         <li>
             <h3>loading</h3>
             <button class="loading">显示loading</button>
-            <button class="closeLoading">关闭loading</button>
         </li>
     </ul>
     <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -97,24 +96,25 @@
             });
         });
 
-        var closeLoading;
         $('.loading').click(function () {
             closeLoading = $.elementUI.loading('数据加载中');
-        });
-
-        $('.closeLoading').click(function () {
-            closeLoading();
+            setTimeout(function () {
+                closeLoading();
+            }, 2000);
         });
 
         $.elementUI.autocomplete({
             target: '.autocomplete',
             message: '请输入标签',
             getData: function (value) {
-                var data = [];
+                var data = [],
+                    self = this;
                 for (var i = 0; i < 20; i++) {
                     data.push({ id: i, value: 'ly' + i });
                 }
-                this.render(data);
+                setTimeout(function () {
+                    self.render(data);
+                }, 2000);
             },
             itemSelected: function (id, value) {
                 console.log(id, value)
