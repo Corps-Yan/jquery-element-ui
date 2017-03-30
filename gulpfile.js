@@ -49,6 +49,6 @@ Eagle(function (mix) {
         .webpack('./src/jquery-element-ui.js');
 
     if (!config.production) {
-        mix.copy(['./node_modules/jquery/dist/jquery.js', './examples/index.html']);
+        mix.copy('./examples/index.html');
     }
 });
