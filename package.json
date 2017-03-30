@@ -3,18 +3,20 @@
   "version": "1.0.0",
   "description": "element-ui for jquery",
   "main": "dist/jquery-element-ui.js",
-  "directories": {
-    "example": "examples"
+  "homepage": "https://youngluo.github.io/jquery-element-ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/youngluo/jquery-element-ui.git"
   },
+  "bugs": {
+    "url": "https://github.com/youngluo/jquery-element-ui/issues"
+  },
+  "author": "youngluo",
+  "license": "MIT",
   "scripts": {
     "dev": "rm -rf dist && gulp",
     "watch": "rm -rf dist && gulp && gulp watch",
     "prod": "rm -rf dist && gulp --prod"
-  },
-  "author": "youngluo",
-  "license": "MIT",
-  "dependencies": {
-    "jquery": "^3.2.0"
   },
   "devDependencies": {
     "ejs-loader": "^0.3.0",
