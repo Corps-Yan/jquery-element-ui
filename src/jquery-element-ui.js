@@ -78,7 +78,7 @@
             }
         },
         autocomplete: function (options) {
-            options.message = options.message ? options.message : '请输入查询条件';
+            options.message = '暂无数据';
 
             var $html = $(require('./templates/autocomplete.ejs')(options)),
                 $target = $(options.target)
@@ -89,7 +89,8 @@
                 $autocomplete = $target.parent(),
                 $dataWrapper = $autocomplete.find('.el-autocomplete-suggestion-data'),
                 $loading = $autocomplete.find('.el-autocomplete-loading'),
-                $hint = $autocomplete.find('.el-autocomplete-hint');
+                $hint = $autocomplete.find('.el-autocomplete-hint'),
+                isFetching = false;
 
             $target
                 .focus(function () {
@@ -101,18 +102,20 @@
                 .on('input', utils.debounce(function () {
                     var value = $.trim($(this).val());
                     $dataWrapper.html('');
-                    if (!value) {
+                    if (!value && !isFetching) {
                         return $hint.show();
                     }
-                    if (options.getData) {
+                    if (value && options.getData) {
                         $loading.show();
                         $hint.hide();
                         options.getData(value);
+                        isFetching = true;
                     }
-                }, 300));
+                }, 350));
 
             options.render = function (data) {
                 $loading.hide();
+                isFetching = false;
                 var html = '';
                 data.forEach(function (item) {
                     html += '<li data-id="' + item.id + '">' + item.value + '</li>';
