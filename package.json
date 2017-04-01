@@ -1,8 +1,15 @@
 {
+  "name": "jquery-element-ui-document",
+  "scripts": {
+    "start": "gulp",
+    "watch": "gulp watch"
+  },
   "devDependencies": {
+    "gulp": "^3.9.1",
     "gulp-eagle": "^1.1.4"
   },
   "dependencies": {
-    "jquery-element-ui": "^1.0.0"
-  }
+    "jquery-element-ui": "^1.0.1"
+  },
+  "version": "1.0.0"
 }

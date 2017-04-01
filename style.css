@@ -16,7 +16,7 @@ h3,
 h5 {
   margin-top: 2rem;
   margin-bottom: 1rem;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   font-weight: normal;
   color: #159957;
 }
@@ -42,11 +42,12 @@ h5 {
 
 .container {
   width: 50%;
-  margin: 8rem auto;
+  margin: 3.5rem auto;
 }
 
 .box > div {
-  margin: 3rem 0;
+  margin: 1rem 0;
+  line-height: 2;
 }
 
 .container li {
@@ -54,7 +55,7 @@ h5 {
 }
 
 .container h5 {
-  font-size: 1.2rem;
+  font-size: .9rem;
 }
 
 .container .reset-tag {
@@ -62,7 +63,7 @@ h5 {
   margin-left: 2rem;
   padding: 1px 8px;
   color: #20a0ff;
-  font-size: 14px;
+  font-size: .9rem;
   border: 1px solid #20a0ff;
   border-radius: 4px;
   cursor: pointer;
@@ -84,9 +85,35 @@ h5 {
 
 .footer {
   padding: 1rem 0;
+  font-size: 12px;
 }
 
 .footer p {
-  font-size: 14px;
   text-align: center;
+}
+
+@media screen and (max-width: 769px) {
+  .header {
+    padding: 3rem 4rem;
+  }
+  .container {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 2rem 1.5rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+  }
+  .header p {
+    margin: 1.2rem 0;
+    font-size: .8rem;
+  }
+  .container {
+    width: 80%;
+    margin: 2.5rem auto;
+  }
 }
