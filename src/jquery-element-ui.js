@@ -78,9 +78,14 @@
             }
         },
         autocomplete: function (options) {
-            options.message = '暂无数据';
+            if (options.render) {
+                delete options.render;
+            }
+            if (options.reset) {
+                delete options.reset;
+            }
 
-            var $html = $(require('./templates/autocomplete.ejs')(options)),
+            var $html = $(require('./templates/autocomplete.ejs')({ message: '暂无数据' })),
                 $target = $(options.target)
                     .attr('autocomplete', 'off')
                     .addClass('el-input__inner')
