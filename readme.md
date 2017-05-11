@@ -15,7 +15,7 @@ npm install --save jquery-element-ui
     message | 标签名称 | string | -- | --
     closable | 是否显示关闭按钮 | boolean | -- | false
     target | 存放标签容器 | string | -- | --
-    type |  类型 | string | primary/gray/success/warning/danger | default
+    type |  类型 | string | default/primary/gray/success/warning/danger | default
 
 - message 消息提示：$.elementUI.message(options)
 
