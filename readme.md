@@ -43,6 +43,6 @@ npm install --save jquery-element-ui
 
 - alert 弹框：$.elementUI.alert(title, message)
 
-- title：标题。
-- message：提示信息。
+    - title：标题。
+    - message：提示信息。
 
