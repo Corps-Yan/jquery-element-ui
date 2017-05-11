@@ -25,11 +25,6 @@ npm install --save jquery-element-ui
     type |  类型 | string | success/warning/info/error | info
     duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | -- | 3000
 
-- alert 弹框：$.elementUI.alert(title, message)
-
-    - title：标题。
-    - message：提示信息。
-
 - autocomplete 自动远程搜索：$.elementUI.autocomplete(options)
 
     参数 | 说明 | 类型 | 可选值 | 默认值
@@ -45,4 +40,9 @@ npm install --save jquery-element-ui
     调用返回close函数，关闭loading。
  
     - text：提示文本信息。
+
+- alert 弹框：$.elementUI.alert(title, message)
+
+- title：标题。
+- message：提示信息。
 
